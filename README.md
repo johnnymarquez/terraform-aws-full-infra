@@ -1,5 +1,8 @@
 ## Project Structure
 
+Full AWS sample infrastructure with VPC, private/public instances, application load balancer, terraform backend s3
+bucket, public/private/alb security groups, Elastic IPs allocation, latest Ubuntu AMI, automatic ssh key generation, and
+complex data types.
 All the resources in this project are separated in different ```.tf``` files for ease of identification, using
 [terraform aws modules](https://github.com/terraform-aws-modules) as much as possible with version constrains.
 

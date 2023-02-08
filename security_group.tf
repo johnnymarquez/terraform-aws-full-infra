@@ -3,7 +3,7 @@ module "security_group_web" {
   version = "~> 4.0"
 
   name        = "security-group-web"
-  description = "Allows HTTP/S connections from anywhere and SSH connections from the VPC CIDR"
+  description = "Allows HTTP/S connections"
 
   vpc_id = module.vpc.vpc_id
 
@@ -26,8 +26,8 @@ module "security_group_web" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      description = "SSH connections from vpc cidr"
-      cidr_blocks = module.vpc.vpc_cidr_block
+      description = "SSH connections"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 
@@ -56,18 +56,8 @@ module "security_group_private" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      description = "SSH connections from vpc cidr"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    }
-  ]
-
-  ingress_with_source_security_group_id = [
-    {
-      from_port                = 22
-      to_port                  = 22
-      protocol                 = "tcp"
-      description              = "Connections from web instncaes"
-      source_security_group_id = module.security_group_web.security_group_id
+      description = "SSH connections"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 

@@ -7,8 +7,8 @@ terraform {
   }
   /*
   backend "s3" {
-    bucket = "terraform-backend-development-exercise"
+    bucket = "terraform-backend"
     key    = "key"
-    region = "us-west-2"
+    region = "us-east-1"
   }*/
 }

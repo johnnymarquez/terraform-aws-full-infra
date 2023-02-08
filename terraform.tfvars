@@ -1,10 +1,10 @@
 aws = {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 vpc = {
   name               = "development"
-  azs                = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  azs                = ["us-east-1a", "us-east-1b", "us-east-1c"]
   cidr               = "10.10.10.0/24"
   public_subnets     = ["10.10.10.0/26", "10.10.10.64/26"]
   private_subnets    = ["10.10.10.128/25"]
@@ -13,7 +13,7 @@ vpc = {
 }
 
 ec2 = {
-  name                        = "web-instance"
+  name                        = "public-instance"
   instance_type               = "t2.small"
   key_name                    = "key"
   associate_public_ip_address = true
@@ -22,7 +22,6 @@ ec2 = {
 sudo -i
 apt-get update &&
 apt-get install -y nginx &&
-echo '<html><body><h1>Healthy</h1></body></html>' > /var/www/html/status.html &&
 systemctl restart nginx
 EOF
 }
@@ -44,7 +43,7 @@ alb = {
     health_check         = {
       enabled             = true
       interval            = 30
-      path                = "/status.html"
+      path                = "/index.html"
       port                = "traffic-port"
       healthy_threshold   = 3
       unhealthy_threshold = 3
@@ -60,6 +59,6 @@ alb = {
 }
 
 s3 = {
-  bucket = "terraform-backend-development-exercise"
+  bucket = "terraform-backend"
   acl    = "private"
 }
